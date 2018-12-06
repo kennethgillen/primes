@@ -17,4 +17,8 @@ script:
   - docker-compose run --rm primes | grep help
 
   # Can the app understand we want to generate five numbers?
-  - docker-compose run --rm primes -v -p 5 | wc -l | grep 5
+  - docker-compose run --rm primes -p 5 | wc -l | grep 5
+
+  # Can we guarantee these are primes?
+  # We know the 20,000'th prime is 224737
+  - docker-compose run --rm primes -p 20000| wc -l | grep 20000 | grep 224737
