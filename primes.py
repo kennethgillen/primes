@@ -46,7 +46,7 @@ if verbose:
 
 # Declare a numpy array of bool values to store "prime or not"
 # The array index will be used to refer to an integer value.
-speculative_largest_prime = desired_num_primes * 100
+speculative_largest_prime = desired_num_primes * 15
 integers = np.ones(speculative_largest_prime + 1, dtype=bool)
 
 # RFE - this will currently run through the entire array
