@@ -26,6 +26,9 @@ parser.add_argument(
     help="the (integer) number of prime numbers you wish to calculate."
 )
 
-args = parser.parse_args()
+# Display the full help message if the user hasn't supplied any arguments.
+if len(sys.argv) == 1:
+    parser.print_help(sys.stderr)
+    sys.exit(1)
 
-print "Stub for python application."
+args = parser.parse_args()
