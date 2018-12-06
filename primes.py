@@ -124,8 +124,6 @@ for this_integer in range(2, integers.size-1):
         # Storing an array of just the primes for later use.
         # Down-side here is we're using double the memory we really need.
         primes_only[primes_seen] = this_integer
-        print primes_seen
-        print primes_only[primes_seen]
         if args.primesonly:
             print "Prime " + str(primes_seen) + ": " + str(this_integer)
         if primes_seen == desired_num_primes:
