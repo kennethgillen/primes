@@ -21,5 +21,10 @@ script:
 
   # Can we guarantee these are primes?
   # We know the 20,000'th prime is 224737, from external sources.
-  # e.g. https://www.dcode.fr/prime-numbers-search 
+  # e.g. https://primes.utm.edu/nthprime/index.php#nth
   - docker-compose run --rm primes -p 20000| grep "Prime 20000" | grep 224737
+
+  # Can we generate a multiplication table with a an example prime product?
+  # The 20'th prime is 229. Check for the product of that in the last line of output.
+  # https://primes.utm.edu/nthprime/index.php#nth
+  - docker-compose run --rm primes 50 | tail -n 1 |grep $((229*229))

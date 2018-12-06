@@ -66,7 +66,7 @@ for this_integer in range(2, integers.size-1):
 
     if verbose:
         print "Incrementing through the array, setting" \
-              + " elements to not-prime every" \
+              + " elements to not-prime every " \
               + str(iteration_increment)
 
     if verbose:
@@ -108,11 +108,10 @@ for this_integer in range(2, integers.size-1):
 # print the values which are primes.
 #   RFE we could append only primes during the iterations above
 #   then sort the values, rather than iterating twice? # TODO gather metrics
-primes_only = np.ones(desired_num_primes+1, dtype=np.int64)
+primes_only = np.ones(desired_num_primes, dtype=np.int64)
 primes_seen = 1
 if verbose:
     print "Iterating through the structure."
-
 
 # Iterate through the data structure till we reach desired number
 for this_integer in range(2, integers.size-1):
@@ -123,7 +122,10 @@ for this_integer in range(2, integers.size-1):
         #   looking at the next array element already identified as a prime?
         # Storing an array of just the primes for later use.
         # Down-side here is we're using double the memory we really need.
-        primes_only[primes_seen] = this_integer
+        if args.verbose:
+            print "Seen the prime: " + str(this_integer)
+            print "Primes seen: " + str(primes_seen)
+        primes_only[primes_seen - 1] = this_integer
         if args.primesonly:
             print "Prime " + str(primes_seen) + ": " + str(this_integer)
         if primes_seen == desired_num_primes:
@@ -135,5 +137,19 @@ for this_integer in range(2, integers.size-1):
     # RFE - if we want to calculate more values than our speculative array
     # definition has predefined, we'll need to increase the size of the array.
 
-
 # We want to output the product of two identical arrays of primes.
+for row in range(primes_only.size+1):
+    rowtext = ""
+    for column in range(primes_only.size+1):
+        if column == 0 and row == 0:
+            rowtext += "|   |"
+        else:
+            if column == 0:
+                rowtext += "| {} |".format(primes_only[row-1])
+            elif row == 0:
+                rowtext += " {} |".format(primes_only[column-1])
+            else:
+                rowtext += " {} |".format(
+                    primes_only[row-1] * primes_only[column-1]
+                )
+    print rowtext
