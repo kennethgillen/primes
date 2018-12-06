@@ -15,4 +15,3 @@ RUN yum -y install epel-release  \
  && chmod 755 /opt/primes/primes.py
 USER primes
 ENTRYPOINT ["/opt/primes/primes.py"]
-CMD [""]
