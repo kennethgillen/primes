@@ -1,0 +1,30 @@
+language: python
+python:
+  - 2.7
+services:
+  - docker
+
+before_install:
+  - pip install flake8
+  - docker-compose build
+
+script:
+  # Style linting for the application itself
+  - flake8 primes.py
+
+  # Does the container run, start the Python primes script
+  # and offer some usage instructions?
+  - docker-compose run --rm primes | grep help
+
+  # Can the app understand we want to generate five numbers?
+  - docker-compose run --rm primes -p 5 | wc -l | grep 5
+
+  # Can we guarantee these are primes?
+  # We know the 20,000'th prime is 224737, from external sources.
+  # e.g. https://primes.utm.edu/nthprime/index.php#nth
+  - docker-compose run --rm primes -p 20000| grep "Prime 20000" | grep 224737
+
+  # Can we generate a multiplication table with a an example prime product?
+  # The 20'th prime is 229. Check for the product of that in the last line of output.
+  # https://primes.utm.edu/nthprime/index.php#nth
+  - docker-compose run --rm primes 50 | tail -n 1 |grep $((229*229))
