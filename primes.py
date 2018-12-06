@@ -104,7 +104,7 @@ for this_integer in range(2, integers.size-1):
 # Iterate through our primes data structure, and output the values.
 primes_seen = 1
 if verbose:
-  print "Iterating through the structure."
+    print "Iterating through the structure."
 
 if args.primesonly:
     # Iterate through the whole data structure
