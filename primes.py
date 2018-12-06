@@ -139,19 +139,21 @@ for this_integer in range(2, integers.size-1):
     # RFE - if we want to calculate more values than our speculative array
     # definition has predefined, we'll need to increase the size of the array.
 
-# We want to output the product of the array of primes.
-for row in range(primes_only.size+1):
-    rowtext = ""
-    for column in range(primes_only.size+1):
-        if column == 0 and row == 0:
-            rowtext += "|   |"
-        else:
-            if column == 0:
-                rowtext += "| {} |".format(primes_only[row-1])
-            elif row == 0:
-                rowtext += " {} |".format(primes_only[column-1])
+
+if not args.primesonly:
+    # We want to output the product of the array of primes.
+    for row in range(primes_only.size+1):
+        rowtext = ""
+        for column in range(primes_only.size+1):
+            if column == 0 and row == 0:
+                rowtext += "|   |"
             else:
-                rowtext += " {} |".format(
-                    primes_only[row-1] * primes_only[column-1]
-                )
-    print rowtext
+                if column == 0:
+                    rowtext += "| {} |".format(primes_only[row-1])
+                elif row == 0:
+                    rowtext += " {} |".format(primes_only[column-1])
+                else:
+                    rowtext += " {} |".format(
+                        primes_only[row-1] * primes_only[column-1]
+                    )
+        print rowtext
