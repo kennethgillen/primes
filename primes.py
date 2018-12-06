@@ -108,19 +108,21 @@ for this_integer in range(2, integers.size-1):
 # print the values which are primes.
 #   RFE we could append only primes during the iterations above
 #   then sort the values, rather than iterating twice? # TODO gather metrics
+
+# Storing an array of just the primes for later use.
 primes_only = np.ones(desired_num_primes, dtype=np.int64)
 primes_seen = 1
-if verbose:
-    print "Iterating through the structure."
 
-# Iterate through the data structure till we reach desired number
+if verbose:
+    print "Iterating our array, to find only the primes."
+
+# Iterate through the data structure till we reach desired number of primes
 for this_integer in range(2, integers.size-1):
+    #   Note: Maybe numpy has way of making this faster, and only
+    #   looking at the next array element already identified as a prime?
+
     # If this integer is a prime:
     if integers[this_integer]:
-        # Look at the next element of the array.
-        #   Maybe numpy has way of making this faster, and only
-        #   looking at the next array element already identified as a prime?
-        # Storing an array of just the primes for later use.
         # Down-side here is we're using double the memory we really need.
         if args.verbose:
             print "Seen the prime: " + str(this_integer)
@@ -137,7 +139,7 @@ for this_integer in range(2, integers.size-1):
     # RFE - if we want to calculate more values than our speculative array
     # definition has predefined, we'll need to increase the size of the array.
 
-# We want to output the product of two identical arrays of primes.
+# We want to output the product of the array of primes.
 for row in range(primes_only.size+1):
     rowtext = ""
     for column in range(primes_only.size+1):
