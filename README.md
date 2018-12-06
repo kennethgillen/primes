@@ -1,5 +1,11 @@
 # Primes
 
+### Travis-CI test status:
+#### Branch: master
+[![Build Status](https://travis-ci.org/kennethgillen/primes.svg?branch=master)](https://travis-ci.org/kennethgillen/primes)
+#### Branch: getting_started - initial development
+[![Build Status](https://travis-ci.org/kennethgillen/primes.svg?branch=getting_started)](https://travis-ci.org/kennethgillen/primes)
+
 ### How to run this application
 
 The application itself is a python script, `primes.py`.
