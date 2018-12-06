@@ -2,7 +2,7 @@
 
 import sys
 import argparse
-import numpy as np
+# import numpy as np
 
 parser = argparse.ArgumentParser(
     description='An application to calculate and output a \
@@ -32,3 +32,5 @@ if len(sys.argv) == 1:
     sys.exit(1)
 
 args = parser.parse_args()
+
+verbose = args.verbose

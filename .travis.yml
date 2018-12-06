@@ -15,3 +15,6 @@ script:
   # Does the container run, start the Python primes script
   # and offer some usage instructions?
   - docker-compose run --rm primes | grep help
+
+  # Can the app understand we want to generate five numbers?
+  - docker-compose run --rm primes -v -p 5 | wc -l | grep 5
