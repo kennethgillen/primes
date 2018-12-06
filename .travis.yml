@@ -1,0 +1,17 @@
+language: python
+python:
+  - 2.7
+services:
+  - docker
+
+before_install:
+  - pip install flake8
+  - docker-compose build
+
+script:
+  # Style linting for the application itself
+  - flake8 primes.py
+
+  # Does the container run, start the Python primes script
+  # and offer some usage instructions?
+  - docker-compose run --rm primes | grep help
