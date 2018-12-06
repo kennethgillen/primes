@@ -66,7 +66,7 @@ for this_integer in range(2, integers.size-1):
 
     if verbose:
         print "Incrementing through the array, setting" \
-              + " elements to not-prime every " \
+              + " elements to not-prime every" \
               + str(iteration_increment)
 
     if verbose:
@@ -101,23 +101,41 @@ for this_integer in range(2, integers.size-1):
 # in finishing the outer loop after the first iterator is off the end of
 # the array ?
 
-# Iterate through our primes data structure, and output the values.
+# integers is now a full data structure of Booleans representing
+# prime/not prime, indexed by the value of the integer.
+
+# Iterate through our primes data structure and store and optionally
+# print the values which are primes.
+#   RFE we could append only primes during the iterations above
+#   then sort the values, rather than iterating twice? # TODO gather metrics
+primes_only = np.ones(desired_num_primes+1, dtype=np.int64)
 primes_seen = 1
 if verbose:
     print "Iterating through the structure."
 
-if args.primesonly:
-    # Iterate through the whole data structure
-    for this_integer in range(2, integers.size-1):
-        if integers[this_integer]:
-            # Look at the next element of the array.
-            #  Maybe numpy has way of making this faster, and only
-            #  looking at the next array element already identified as a prime?
+
+# Iterate through the data structure till we reach desired number
+for this_integer in range(2, integers.size-1):
+    # If this integer is a prime:
+    if integers[this_integer]:
+        # Look at the next element of the array.
+        #   Maybe numpy has way of making this faster, and only
+        #   looking at the next array element already identified as a prime?
+        # Storing an array of just the primes for later use.
+        # Down-side here is we're using double the memory we really need.
+        primes_only[primes_seen] = this_integer
+        print primes_seen
+        print primes_only[primes_seen]
+        if args.primesonly:
             print "Prime " + str(primes_seen) + ": " + str(this_integer)
-            if primes_seen == desired_num_primes:
-                sys.exit(0)
-            primes_seen = primes_seen + 1
-        this_integer = this_integer + 1
+        if primes_seen == desired_num_primes:
+            # Exit the loop, we're done.
+            break
+        primes_seen = primes_seen + 1
+    this_integer = this_integer + 1
 
     # RFE - if we want to calculate more values than our speculative array
     # definition has predefined, we'll need to increase the size of the array.
+
+
+# We want to output the product of two identical arrays of primes.
